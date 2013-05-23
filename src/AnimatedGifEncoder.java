@@ -3,6 +3,8 @@ import java.io.*;
 import java.awt.*;
 import java.awt.image.*;
 
+import javax.imageio.ImageIO;
+
 /**
  * Class AnimatedGifEncoder - Encodes a GIF file consisting of one or more
  * frames.
@@ -1290,8 +1292,22 @@ class LZWEncoder {
   }
   public static void main(String[] args){
       AnimatedGifEncoder e = new AnimatedGifEncoder();
-      e.start("test.gif");
+      //Want to write to folder data
+      e.start("data/test.gif");
       e.setDelay(1000);
-      
+      e.setRepeat(0);
+      //need a buffered image
+      BufferedImage white = null;
+      BufferedImage black = null;
+      try {
+          white = ImageIO.read(new File("data/white.png"));
+          black = ImageIO.read(new File("data/black.png"));
+          
+      }catch (IOException ex){
+          System.out.println("image had error");
+      }
+      e.addFrame(white);
+      e.addFrame(black);
+      e.finish();
   }
 }
