@@ -1306,6 +1306,7 @@ class LZWEncoder {
       }catch (IOException ex){
           System.out.println("image had error");
       }
+      System.out.println(white.getType());
       e.addFrame(white);
       e.addFrame(black);
       e.finish();
