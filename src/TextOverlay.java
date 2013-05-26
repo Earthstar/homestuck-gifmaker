@@ -20,7 +20,9 @@ import javax.imageio.ImageIO;
 public class TextOverlay {
     
     /**
-     * Returns a new BufferedImage with text laid over it
+     * Returns a new BufferedImage with text laid over it.
+     * TODO make sure text doesn't overflow sides of image?
+     * TODO add parameter to specify area that text should fill?
      * @param old
      * @param text
      * @return
@@ -32,14 +34,30 @@ public class TextOverlay {
         Graphics2D g2d = img.createGraphics();
         g2d.drawImage(old, 0, 0, null);
         g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("Serif", Font.PLAIN, 20));
+        g2d.setFont(new Font("Courier New", Font.BOLD, 20));
         FontMetrics fm = g2d.getFontMetrics();
+        //Text appears at right top corner.
         int x = img.getWidth() - fm.stringWidth(text) - 5;
         int y = fm.getHeight();
         g2d.drawString(text, x, y);
         g2d.dispose();
         return img;
         
+    }
+    
+    
+    /**
+     * Given an amount of text and a dimension, 
+     * splits the text into lines that fit on the dimension. 
+     * Text may overflow in the vertical direction 
+     * @param text - string with spaces
+     * @param x
+     * @param y
+     * @param font
+     * @return
+     */
+    public static String[] splitText(String text, int x, int y, String font){
+        return null;
     }
     
     public static void main(String[] args){
@@ -50,7 +68,8 @@ public class TextOverlay {
         } catch (Exception e){
             
         }
-        BufferedImage newImg = overlayText(img, "Hello world");
+        BufferedImage newImg = overlayText(img, 
+                "an extremely long piece of text that will spill over the available space in the image");
         //Write image to file
         File output = new File("data/text_overlay.png");
         try {
