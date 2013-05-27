@@ -1,3 +1,4 @@
+package gifmaker;
 
 import java.io.*;
 import java.awt.*;
