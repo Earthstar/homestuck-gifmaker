@@ -883,7 +883,7 @@ class NeuQuant {
    */
   public void unbiasnet() {
 
-    int i, j;
+    int i;
 
     for (i = 0; i < netsize; i++) {
       network[i][0] >>= netbiasshift;
@@ -1290,11 +1290,12 @@ class LZWEncoder {
       flush_char(outs);
     }
   }
+  
   public static void main(String[] args){
       AnimatedGifEncoder e = new AnimatedGifEncoder();
       //Want to write to folder data
       e.start("data/test.gif");
-      e.setDelay(1000);
+      e.setDelay(500);
       e.setRepeat(0);
       //need a buffered image
       BufferedImage white = null;
@@ -1306,7 +1307,10 @@ class LZWEncoder {
       }catch (IOException ex){
           System.out.println("image had error");
       }
-      System.out.println(white.getType());
+      e.addFrame(white);
+      e.addFrame(black);
+      //Can set different delays 
+      e.setDelay(2000);
       e.addFrame(white);
       e.addFrame(black);
       e.finish();
