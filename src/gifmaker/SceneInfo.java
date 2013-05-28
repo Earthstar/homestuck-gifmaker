@@ -2,11 +2,12 @@ package gifmaker;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Class that stores all the information of one "scene".
- * Intended to be created by the GUI and initialized
+ * Intended to be created by the GUI and initialized by GUI buttons
  * @author earthstar
  *
  */
@@ -17,6 +18,7 @@ public class SceneInfo {
     private String orientation; 
     private String text;
     private String textTiming; //could probably get as int
+    //talksprite should be a string that is in parent's animationMap
     private String talksprite;
     private String talkspriteTiming;
     private String textColor;
@@ -66,7 +68,28 @@ public class SceneInfo {
      */
     public List<FrameInfo> makeFrameInfoList(){
          //TODO
-        return null;
+        //Get individual frames
+        TalkspriteAnimation a = parent.getAnimation(talksprite);
+        List<BufferedImage> images = a.getImages();
+        //Calculate how many letters in text must appear with each animation
+        //May be some rounding error
+        int numLettersPerTalk = Integer.parseInt(talkspriteTiming)/
+                Integer.parseInt(textTiming);
+        List<FrameInfo> frameInfoList = new ArrayList<FrameInfo>();
+        //Stores index of current position
+        int imagesPosition = 0;
+        //For each letter in text, create a new FrameInfo 
+        //Every n letters, change to the next sprite in images
+        //TODO need to mess with order images are shown?
+        for (int i = 0; i < text.length(); i++){
+            if (i % numLettersPerTalk == 0){
+                imagesPosition = (imagesPosition + 1) % images.size();
+            }
+            String toAdd = text.substring(0, i);
+            frameInfoList.add(new FrameInfo(this, toAdd, 
+                    images.get(imagesPosition)));
+        }
+        return frameInfoList;
     }
     
     /**

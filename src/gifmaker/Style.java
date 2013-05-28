@@ -12,13 +12,15 @@ import java.awt.image.BufferedImage;
  *
  */
 public abstract class Style {
-    private int backgroundWidth;
-    private int backgroundHeight;
-    private BufferedImage textbox;
-    private Point textboxLocation;
-    private int talkspriteWidth;
-    private int talkspriteHeight;
-    private Point talkspriteLocation;
+    protected int backgroundWidth;
+    protected int backgroundHeight;
+    protected BufferedImage textbox;
+    protected Point textboxLocation;
+    //Assumes that all talksprites will be the same width and height
+    //and have the same location
+    protected int talkspriteWidth;
+    protected int talkspriteHeight;
+    protected Point talkspriteLocation;
     
     public int getBackgroundWidth() {
         return backgroundWidth;

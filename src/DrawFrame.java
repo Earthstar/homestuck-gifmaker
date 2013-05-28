@@ -8,9 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Class to draw the general chatsprite frame, consisting
- * of background, textbox, and sprite, in that order
- * Might want the textbox to be an image too.
+ * Practice class to draw frame
  * @author earthstar
  *
  */

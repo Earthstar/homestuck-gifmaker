@@ -31,7 +31,7 @@ public class TalkspriteAnimation {
     }
     
     public List<BufferedImage> getImages(){
-        //Sort list, cache it, and then return a list of images
+        //Sort list, and then return a list of images
         Collections.sort(talkspriteImages);
         List<BufferedImage> toReturn = new ArrayList<BufferedImage>();
         for (IndexedData d: talkspriteImages){

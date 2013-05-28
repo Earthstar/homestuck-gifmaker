@@ -26,6 +26,7 @@ public class GIFMaker {
     private Map<String, TalkspriteAnimation> animationMap;
     //GIFMaker automatically generates which names are connected to emotions
     private Map<String, HashSet<String>> nameToEmotion;
+    private List<SceneInfo> sceneList;
     
     public GIFMaker(Style style){
         this.style = style;
@@ -86,6 +87,16 @@ public class GIFMaker {
         return nameToEmotion;
     }
     
+    /**
+     * Returns the talksprite associated with a name, or null
+     * if it doesn't exist
+     * @param name
+     * @return
+     */
+    public TalkspriteAnimation getAnimation(String name){
+        return animationMap.get(name);
+    }
+    
     public Style getStyle() {
         return style;
     }
@@ -105,5 +116,13 @@ public class GIFMaker {
         System.out.println(g.getNameToEmotion());
         System.out.println(g.getAnimationMap().get("karkat_normal").getImages());
     }*/
+
+    public List<SceneInfo> getSceneList() {
+        return sceneList;
+    }
+
+    public void addScene(SceneInfo scene){
+        sceneList.add(scene);
+    }
 
 }
