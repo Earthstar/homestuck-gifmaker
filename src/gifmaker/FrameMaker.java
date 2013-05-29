@@ -33,12 +33,16 @@ public class FrameMaker {
         //Draw textbox to frame
         g2d.drawImage(textbox, style.getTextboxLocation().x, 
                 style.getTextboxLocation().y, null);
+        
         //draw sprite with correct scale factor to frame
         int scaledX = (int) (sprite.getWidth()*style.getTalkspriteScale());
         int scaledY = (int) (sprite.getHeight()*style.getTalkspriteScale());
         g2d.drawImage(sprite, 
                 0, 0, scaledX, scaledY,
                 0, 0, sprite.getWidth(), sprite.getHeight(), null);
+        //Draw text TODO make this better
+        g2d.setFont(style.getFont());
+        g2d.drawString(frameInfo.getText(), style.getTextStart().x, style.getTextStart().y);
         return frame;
     }
     

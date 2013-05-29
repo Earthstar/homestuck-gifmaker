@@ -78,6 +78,8 @@ public class GIFMaker {
             }
         }
     }
+    
+    
 
     public Map<String, TalkspriteAnimation> getAnimationMap(){
         return animationMap;
@@ -127,7 +129,23 @@ public class GIFMaker {
     
     public static void main(String[] args){
         GIFMaker g = new GIFMaker(new TestStyle());
-        
+        SceneInfo s = new SceneInfo(g);
+        s.setText("GODDAMN WHY AM I OFF CENTER");
+        s.setTalksprite("karkat_normal");
+        s.makeFrameInfoList();
+        s.makeFrames();
+        List<BufferedImage> frames = s.getFrames();
+        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        encoder.start("data/test.gif");
+        encoder.setRepeat(0);
+        s.addFrames(encoder);
+        encoder.finish();
+        /*encoder.setDelay(s.calculateTiming());
+        encoder.setRepeat(0);
+        for (BufferedImage f: frames){
+            encoder.addFrame(f);
+        }
+        encoder.finish();*/
     }
 
 }

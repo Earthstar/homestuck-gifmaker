@@ -1,5 +1,6 @@
 package gifmaker;
 
+import java.awt.Font;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +27,15 @@ public class TestStyle extends Style{
         textboxLocation = new Point(100, 150);
         talkspriteWidth = 210;
         talkspriteHeight = 260;
-        talkspriteLocation = new Point(0,0);
+        //Can't make this negative? Might need to mess with 
+        //drawing image from different locations
+        talkspriteLocation = new Point(-100,50);
         talkspriteScale = 2.0;
+        textStart = new Point(300, 300);
+        maxTextWidth = 300;
+        maxTextHeight = 300;
+        font = new Font("Courier New", Font.BOLD, 20);
+        pauseAfterEnd = 5000;
     }
     
 }

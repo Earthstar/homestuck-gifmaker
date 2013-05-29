@@ -24,7 +24,7 @@ public class SceneInfo {
     //talksprite should be a string that is in parent's animationMap
     private String talksprite;
     private String talkspriteTiming;
-    private String textColor;
+    private String textColor; //TODO not sure format of color
     //GUI class responsible for opening background?
     //Or should this class take in a file?
     private String background;
@@ -42,7 +42,7 @@ public class SceneInfo {
         this.parent = parent;
         setOrientation("left");
         setText(null);
-        setTextTiming("5"); //TODO mess with timing
+        setTextTiming("50"); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
         setTalkspriteTiming("200");
         setBackground("data/default_background.png");
@@ -53,7 +53,7 @@ public class SceneInfo {
     }
     
     /**
-     * Returns backgroundImage
+     * Returns backgroundImage, caches it.
      * @return
      */
     public BufferedImage getBackgroundImage(){
@@ -77,8 +77,8 @@ public class SceneInfo {
      * @param textTiming - must be > 0
      * @return
      */
-    public int calculateTiming(int talkspriteTiming, int textTiming){
-        return textTiming; //TODO is this all? This is okay if
+    public int calculateTiming(){
+        return Integer.parseInt(textTiming); //TODO is this all? This is okay if
         //talkspriteTiming is evenly divisible by textTiming. What if not?
     }
     
@@ -89,7 +89,7 @@ public class SceneInfo {
      * 
      * @return
      */
-    public List<FrameInfo> makeFrameInfoList(){
+    public void makeFrameInfoList(){
          //TODO
         //Get individual frames
         TalkspriteAnimation a = parent.getAnimation(talksprite);
@@ -108,11 +108,11 @@ public class SceneInfo {
             if (i % numLettersPerTalk == 0){
                 imagesPosition = (imagesPosition + 1) % images.size();
             }
-            String toAdd = text.substring(0, i);
+            String toAdd = text.substring(0, i+1);
             frameInfoList.add(new FrameInfo(this, toAdd, 
                     images.get(imagesPosition)));
         }
-        return frameInfoList;
+        frameInfos = frameInfoList;
     }
     
     /**
@@ -130,7 +130,15 @@ public class SceneInfo {
      * GIFMaker
      */
     public void addFrames(AnimatedGifEncoder gifEncoder){
-        //TODO
+        gifEncoder.setDelay(calculateTiming());
+        for (BufferedImage f: frames){
+            gifEncoder.addFrame(f);
+        }
+        //The last frame should be longer so that you can read
+        //the text TODO mess with timing. Actually, the mouth
+        //should be moving the entire time, even after
+        gifEncoder.setDelay(5000);
+        gifEncoder.addFrame(frames.get(frames.size()-1));
     }
     
     
@@ -203,8 +211,5 @@ public class SceneInfo {
         return frames;
     }
     
-    public static void main(String[] args){
-        
-    }
-    
+   
 }
