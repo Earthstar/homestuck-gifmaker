@@ -77,4 +77,8 @@ public abstract class Style {
     public Font getFont(){
         return font;
     }
+    
+    public int getPauseAfterEnd(){
+        return pauseAfterEnd;
+    }
 }

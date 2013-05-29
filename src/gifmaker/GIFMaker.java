@@ -133,8 +133,6 @@ public class GIFMaker {
         s.setText("GODDAMN WHY AM I OFF CENTER");
         s.setTalksprite("karkat_normal");
         s.makeFrameInfoList();
-        s.makeFrames();
-        List<BufferedImage> frames = s.getFrames();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.start("data/test.gif");
         encoder.setRepeat(0);

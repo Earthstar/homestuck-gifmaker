@@ -90,7 +90,6 @@ public class SceneInfo {
      * @return
      */
     public void makeFrameInfoList(){
-         //TODO
         //Get individual frames
         TalkspriteAnimation a = parent.getAnimation(talksprite);
         List<BufferedImage> images = a.getImages();
@@ -110,35 +109,40 @@ public class SceneInfo {
             }
             String toAdd = text.substring(0, i+1);
             frameInfoList.add(new FrameInfo(this, toAdd, 
-                    images.get(imagesPosition)));
+                    images.get(imagesPosition), calculateTiming()));
+        }
+        //Add a couple of frames of the character's mouth moving
+        for (int i = 0; 
+                i < parent.getStyle().getPauseAfterEnd()/Integer.parseInt(talkspriteTiming); 
+                i++){
+            imagesPosition = (imagesPosition + 1) % images.size();
+            frameInfoList.add(new FrameInfo(this, text, 
+                    images.get(imagesPosition), Integer.parseInt(talkspriteTiming)));
         }
         frameInfos = frameInfoList;
     }
     
-    /**
+   /* *//**
      * Sets this.frames to a list of BufferedImages of frames. 
      * Should be called by GIFMaker?
-     */
+     *//*
     public void makeFrames(){
         for (FrameInfo f:frameInfos){
             frames.add(FrameMaker.makeFrame(f));
         }
-    }
+    }*/
     
     /**
      * Adds frames to a AnimatedGifEncoder. Should be called by
      * GIFMaker
      */
     public void addFrames(AnimatedGifEncoder gifEncoder){
-        gifEncoder.setDelay(calculateTiming());
-        for (BufferedImage f: frames){
-            gifEncoder.addFrame(f);
+        
+        for (FrameInfo f: frameInfos){
+            gifEncoder.setDelay(f.getTiming());
+            gifEncoder.addFrame(f.getFrame());
         }
-        //The last frame should be longer so that you can read
-        //the text TODO mess with timing. Actually, the mouth
-        //should be moving the entire time, even after
-        gifEncoder.setDelay(5000);
-        gifEncoder.addFrame(frames.get(frames.size()-1));
+        
     }
     
     
