@@ -20,6 +20,7 @@ public abstract class Style {
     //and have the same location
     protected int talkspriteWidth;
     protected int talkspriteHeight;
+    protected double talkspriteScale;
     protected Point talkspriteLocation;
     
     public int getBackgroundWidth() {
@@ -48,6 +49,10 @@ public abstract class Style {
 
     public Point getTalkspriteLocation() {
         return talkspriteLocation;
+    }
+    
+    public double getTalkspriteScale(){
+        return talkspriteScale;
     }
     
 }

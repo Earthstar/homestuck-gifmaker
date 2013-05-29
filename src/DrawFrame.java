@@ -19,7 +19,7 @@ public class DrawFrame {
         BufferedImage sprite = null;
         BufferedImage background = null;
         try {
-            sprite = ImageIO.read(new File("data/karkat_test_2.png"));
+            sprite = ImageIO.read(new File("data/karkat_normal_2.png"));
             background = ImageIO.read(new File("data/sample_background.png"));
         } catch (Exception e){
             System.out.println("can't read image");
@@ -31,8 +31,10 @@ public class DrawFrame {
         //Actually, I think I just want to make another image for this
         g2d.setColor(Color.DARK_GRAY);
         g2d.draw(new Rectangle2D.Double(100, 150, 530, 200));
-        //Draw sprite, TODO need to stretch it to twice original size?
-        g2d.drawImage(sprite, 0, 40, null);
+        //Draw sprite, stretch it to x2 original size
+        g2d.drawImage(sprite, 
+                0, 0, sprite.getWidth()*2, sprite.getHeight()*2,
+                0, 0, sprite.getWidth(), sprite.getHeight(), null);
         File output = new File("data/test_frame_2.png");
         try {
             ImageIO.write(frame, "png", output);

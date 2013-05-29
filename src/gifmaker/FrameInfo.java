@@ -20,5 +20,17 @@ public class FrameInfo {
         this.text = text;
         this.sprite = sprite;
     }
+    
+    public String getText(){
+        return text;
+    }
+    
+    public SceneInfo getParent(){
+        return parent;
+    }
+    
+    public BufferedImage getSprite(){
+        return sprite;
+    }
 
 }

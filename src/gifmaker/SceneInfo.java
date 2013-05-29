@@ -1,9 +1,12 @@
 package gifmaker;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 /**
  * Class that stores all the information of one "scene".
@@ -24,7 +27,8 @@ public class SceneInfo {
     private String textColor;
     //GUI class responsible for opening background?
     //Or should this class take in a file?
-    private BufferedImage background;
+    private String background;
+    private BufferedImage backgroundImage; //cache background img
     private List<FrameInfo> frameInfos;
     private List<BufferedImage> frames;
     private int frameTiming;
@@ -41,10 +45,29 @@ public class SceneInfo {
         setTextTiming("5"); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
         setTalkspriteTiming("200");
-        setBackground(null);
+        setBackground("data/default_background.png");
+        backgroundImage = null;
         FrameMaker.setStyle(parent.getStyle());
         frameInfos = new ArrayList<FrameInfo>();
         frames = new ArrayList<BufferedImage>();
+    }
+    
+    /**
+     * Returns backgroundImage
+     * @return
+     */
+    public BufferedImage getBackgroundImage(){
+        if (backgroundImage != null){
+            return backgroundImage;
+        }
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(background));
+        } catch (Exception e){
+            System.out.println("can't read background");
+            return null;
+        }
+        return img;
     }
     
     /**
@@ -159,11 +182,11 @@ public class SceneInfo {
         this.talkspriteTiming = talkspriteTiming;
     }
 
-    public BufferedImage getBackground() {
+    public String getBackground() {
         return background;
     }
 
-    public void setBackground(BufferedImage background) {
+    public void setBackground(String background) {
         this.background = background;
     }
 
@@ -178,6 +201,10 @@ public class SceneInfo {
 
     public List<BufferedImage> getFrames() {
         return frames;
+    }
+    
+    public static void main(String[] args){
+        
     }
     
 }

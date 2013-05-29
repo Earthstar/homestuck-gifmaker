@@ -124,5 +124,10 @@ public class GIFMaker {
     public void addScene(SceneInfo scene){
         sceneList.add(scene);
     }
+    
+    public static void main(String[] args){
+        GIFMaker g = new GIFMaker(new TestStyle());
+        
+    }
 
 }
