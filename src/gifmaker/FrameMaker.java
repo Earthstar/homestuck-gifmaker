@@ -47,14 +47,14 @@ public class FrameMaker {
         g2d.drawImage(sprite, 
                 startX, startY, startX+scaledX, startY+scaledY,
                 0, 0, sprite.getWidth(), sprite.getHeight(), null);
-        //Draw text TODO make this better
+        //Draw text with different lines
         float textX = style.getTextStart().x;
         int textY = style.getTextStart().y;
         //code from Oracle tutorial
         AttributedString as = new AttributedString(frameInfo.getText());
         AttributedCharacterIterator paragraph = as.getIterator();
         as.addAttribute(TextAttribute.FONT, style.getFont());
-        //TODO color
+        g2d.setColor(frameInfo.parent.getTextColor());
         int paragraphStart = paragraph.getBeginIndex();
         int paragraphEnd = paragraph.getEndIndex();
         FontRenderContext frc = g2d.getFontRenderContext();
@@ -68,8 +68,6 @@ public class FrameMaker {
             layout.draw(g2d, textX, drawPosY);
             drawPosY += layout.getDescent() + layout.getLeading();
         }
-//        g2d.setFont(style.getFont());
-//        g2d.drawString(frameInfo.getText(), style.getTextStart().x, style.getTextStart().y);
         return frame;
     }
     

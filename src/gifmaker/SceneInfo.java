@@ -1,5 +1,6 @@
 package gifmaker;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class SceneInfo {
     //talksprite should be a string that is in parent's animationMap
     private String talksprite;
     private String talkspriteTiming;
-    private String textColor; //TODO not sure format of color
+    private Color textColor; //TODO not sure format of color
     //GUI class responsible for opening background?
     //Or should this class take in a file?
     private String background;
@@ -34,7 +35,7 @@ public class SceneInfo {
     private int frameTiming;
     
     /**
-     * Initializes empty SceneInfo, which GUI is intended to
+     * Initializes empty SceneInfo with defaults, which GUI is intended to
      * fill out. All times are in milliseconds.
      * @param parent
      */
@@ -50,6 +51,7 @@ public class SceneInfo {
         FrameMaker.setStyle(parent.getStyle());
         frameInfos = new ArrayList<FrameInfo>();
         frames = new ArrayList<BufferedImage>();
+        textColor = Color.BLACK;
     }
     
     /**
@@ -202,11 +204,11 @@ public class SceneInfo {
         this.background = background;
     }
 
-    public String getTextColor() {
+    public Color getTextColor() {
         return textColor;
     }
 
-    public void setTextColor(String textColor) {
+    public void setTextColor(Color textColor) {
         this.textColor = textColor;
     }
 

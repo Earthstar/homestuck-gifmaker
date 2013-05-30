@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Initialize a style for testing purposes
+ * Initialize a style for testing purposes TODO add max word length?
  * @author earthstar
  *
  */
@@ -34,7 +34,7 @@ public class TestStyle extends Style{
         textStart = new Point(300, 300);
         maxTextWidth = 300;
         maxTextHeight = 300;
-        font = new Font("Courier New", Font.BOLD, 20);
+        font = new Font("Courier New", Font.BOLD, 15);
         pauseAfterEnd = 5000;
     }
     

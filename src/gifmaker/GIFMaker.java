@@ -110,15 +110,7 @@ public class GIFMaker {
     public void setDestination(String destination) {
         this.destination = destination;
     }
-    /*
-    public static void main(String[] args){
-        AlterniaboundStyle s = new AlterniaboundStyle();
-        GIFMaker g = new GIFMaker(s);
-        System.out.println(g.getAnimationMap());
-        System.out.println(g.getNameToEmotion());
-        System.out.println(g.getAnimationMap().get("karkat_normal").getImages());
-    }*/
-
+    
     public List<SceneInfo> getSceneList() {
         return sceneList;
     }
