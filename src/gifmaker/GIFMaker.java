@@ -124,9 +124,10 @@ public class GIFMaker {
         SceneInfo s = new SceneInfo(g);
         s.setText("GODDAMN WHY AM I OFF CENTER BLUH BLUH");
         s.setTalksprite("karkat_normal");
+        s.setIsLeft(false);
         s.makeFrameInfoList();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.start("data/test.gif");
+        encoder.start("data/testright.gif");
         encoder.setRepeat(0);
         s.addFrames(encoder);
         encoder.finish();

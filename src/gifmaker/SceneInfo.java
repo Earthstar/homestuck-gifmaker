@@ -19,7 +19,7 @@ public class SceneInfo {
 
     private GIFMaker parent;
     //Orientation should only be "left" or "right". Enum?
-    private String orientation; 
+    private boolean isLeft; 
     private String text;
     private String textTiming; //could probably get as int
     //talksprite should be a string that is in parent's animationMap
@@ -41,7 +41,7 @@ public class SceneInfo {
      */
     public SceneInfo(GIFMaker parent){
         this.parent = parent;
-        setOrientation("left");
+        setIsLeft(true);
         setText(null);
         setTextTiming("50"); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
@@ -148,16 +148,17 @@ public class SceneInfo {
     }
     
     
+    
     /**
      * Getters and setters
      */
 
-    public String getOrientation() {
-        return orientation;
+    public boolean isLeft() {
+        return isLeft;
     }
 
-    public void setOrientation(String orientation) {
-        this.orientation = orientation;
+    public void setIsLeft(boolean orientation) {
+        this.isLeft = orientation;
     }
 
     public GIFMaker getParent() {
@@ -216,6 +217,7 @@ public class SceneInfo {
     public List<BufferedImage> getFrames() {
         return frames;
     }
+    
     
    
 }

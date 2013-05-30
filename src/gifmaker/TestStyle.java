@@ -24,17 +24,20 @@ public class TestStyle extends Style{
         } catch (IOException ex){
             System.out.println("can't find textbox");
         }
-        textboxLocation = new Point(100, 150);
-        talkspriteWidth = 210;
-        talkspriteHeight = 260;
-        //Might need to mess with 
-        //drawing image from different locations
-        talkspriteLocation = new Point(-100,50);
-        talkspriteScale = 2.0;
-        textStart = new Point(300, 300);
+        leftTextboxLocation = new Point(100, 150);
+        rightTextboxLocation = new Point(50, 150);
+        leftTextStart = new Point(300, 200);
+        rightTextStart = new Point(100, 200);
         maxTextWidth = 300;
         maxTextHeight = 300;
         font = new Font("Courier New", Font.BOLD, 15);
+        talkspriteWidth = 210;
+        talkspriteHeight = 260;
+        talkspriteScale = 2.0;
+        //Might need to mess with 
+        //drawing image from different locations
+        leftTalkspriteLocation = new Point(-100,50);
+        rightTalkspriteLocation = new Point(300,50);
         pauseAfterEnd = 5000;
     }
     

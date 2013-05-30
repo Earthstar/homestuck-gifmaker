@@ -17,8 +17,11 @@ public abstract class Style {
     protected int backgroundWidth;
     protected int backgroundHeight;
     protected BufferedImage textbox;
-    protected Point textboxLocation;
-    protected Point textStart;
+    //Distinguish between left-flipped and right-flipped sprites
+    protected Point leftTextboxLocation;
+    protected Point rightTextboxLocation;
+    protected Point leftTextStart;
+    protected Point rightTextStart;
     protected float maxTextWidth;
     protected int maxTextHeight;
     protected Font font;
@@ -27,7 +30,8 @@ public abstract class Style {
     protected int talkspriteWidth;
     protected int talkspriteHeight;
     protected double talkspriteScale;
-    protected Point talkspriteLocation;
+    protected Point leftTalkspriteLocation;
+    protected Point rightTalkspriteLocation;
     protected int pauseAfterEnd;
     
     public int getBackgroundWidth() {
@@ -42,8 +46,12 @@ public abstract class Style {
         return textbox;
     }
 
-    public Point getTextboxLocation() {
-        return textboxLocation;
+    public Point getLeftTextboxLocation() {
+        return leftTextboxLocation;
+    }
+    
+    public Point getRightTextboxLocation(){
+        return rightTextboxLocation;
     }
 
     public int getTalkspriteWidth() {
@@ -54,16 +62,24 @@ public abstract class Style {
         return talkspriteHeight;
     }
 
-    public Point getTalkspriteLocation() {
-        return talkspriteLocation;
+    public Point getLeftTalkspriteLocation() {
+        return leftTalkspriteLocation;
+    }
+    
+    public Point getRightTalkspriteLocation() {
+        return rightTalkspriteLocation;
     }
     
     public double getTalkspriteScale(){
         return talkspriteScale;
     }
     
-    public Point getTextStart(){
-        return textStart;
+    public Point getLeftTextStart(){
+        return leftTextStart;
+    }
+    
+    public Point getRightTextStart(){
+        return rightTextStart;
     }
     
     public float getMaxTextWidth(){
