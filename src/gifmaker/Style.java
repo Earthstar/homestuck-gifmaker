@@ -19,7 +19,7 @@ public abstract class Style {
     protected BufferedImage textbox;
     protected Point textboxLocation;
     protected Point textStart;
-    protected int maxTextWidth;
+    protected float maxTextWidth;
     protected int maxTextHeight;
     protected Font font;
     //Assumes that all talksprites will be the same width and height
@@ -66,7 +66,7 @@ public abstract class Style {
         return textStart;
     }
     
-    public int getMaxTextWidth(){
+    public float getMaxTextWidth(){
         return maxTextWidth;
     }
     

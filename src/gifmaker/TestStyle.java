@@ -27,7 +27,7 @@ public class TestStyle extends Style{
         textboxLocation = new Point(100, 150);
         talkspriteWidth = 210;
         talkspriteHeight = 260;
-        //Can't make this negative? Might need to mess with 
+        //Might need to mess with 
         //drawing image from different locations
         talkspriteLocation = new Point(-100,50);
         talkspriteScale = 2.0;
