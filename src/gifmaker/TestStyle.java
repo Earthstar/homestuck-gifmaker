@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 public class TestStyle extends Style{
     
     public TestStyle(){
+        spriteLocation = "data/Alterniabound";
         backgroundWidth = 650;
         backgroundHeight = 450;
         //need to create image of textbox
@@ -36,7 +37,7 @@ public class TestStyle extends Style{
         talkspriteScale = 2.0;
         //Might need to mess with 
         //drawing image from different locations
-        leftTalkspriteLocation = new Point(-100,50);
+        leftTalkspriteLocation = new Point(-160,-150);
         rightTalkspriteLocation = new Point(300,50);
         pauseAfterEnd = 5000;
     }

@@ -44,7 +44,7 @@ public class GIFMaker {
      * name_emotion:TalkspriteAnimation. Entries must be .png format.
      */
     public void compileAnimations(){
-        File dataLocation = new File("data");
+        File dataLocation = new File(style.getSpriteLocation());
         File[] imageFiles = dataLocation.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name){
                 //Only accepts .png files of form
@@ -123,11 +123,10 @@ public class GIFMaker {
         GIFMaker g = new GIFMaker(new TestStyle());
         SceneInfo s = new SceneInfo(g);
         s.setText("GODDAMN WHY AM I OFF CENTER BLUH BLUH");
-        s.setTalksprite("karkat_normal");
-        s.setIsLeft(false);
+        s.setTalksprite("feferi_TalkEyesWideLeaningIn");
         s.makeFrameInfoList();
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.start("data/testright.gif");
+        encoder.start("data/test.gif");
         encoder.setRepeat(0);
         s.addFrames(encoder);
         encoder.finish();

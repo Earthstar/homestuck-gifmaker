@@ -43,7 +43,7 @@ public class SceneInfo {
         this.parent = parent;
         setIsLeft(true);
         setText(null);
-        setTextTiming("50"); //TODO mess with timing
+        setTextTiming("10"); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
         setTalkspriteTiming("200");
         setBackground("data/default_background.png");
