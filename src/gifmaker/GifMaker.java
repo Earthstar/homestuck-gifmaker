@@ -14,12 +14,14 @@ import java.util.HashSet;
 import javax.imageio.ImageIO;
 
 /**
- * Overarching class. Contains main method.
+ * Overarching class. Contains main method. TODO find some way
+ * of storing the timing information for each sprite
  * @author earthstar
  *
  */
-public class GIFMaker {
+public class GifMaker {
     private Style style;
+    private Map<String, Style> styleMap;
     private AnimatedGifEncoder gifEncoder;
     //Where file is to be saved
     private String destination;
@@ -28,13 +30,29 @@ public class GIFMaker {
     private Map<String, HashSet<String>> nameToEmotion;
     private List<SceneInfo> sceneList;
     
-    public GIFMaker(Style style){
+    public GifMaker(Style style){
         this.style = style;
         gifEncoder = new AnimatedGifEncoder();
+        gifEncoder.setRepeat(0);
         this.setDestination(null);
         animationMap = new HashMap<String, TalkspriteAnimation>();
         nameToEmotion = new HashMap<String, HashSet<String>>();
-        compileAnimations();
+        sceneList = new ArrayList<SceneInfo>();
+        //compileAnimations();
+    }
+    
+    public GifMaker(){
+        //Which constructor does GUI use?
+        styleMap = new HashMap<String, Style>();
+        styleMap.put("Test", new TestStyle());
+        //styleMap.put("Alterniabound", new AlterniaboundStyle());
+        new GifMaker(null);
+        gifEncoder = new AnimatedGifEncoder();
+        gifEncoder.setRepeat(0);
+        this.setDestination(null);
+        animationMap = new HashMap<String, TalkspriteAnimation>();
+        nameToEmotion = new HashMap<String, HashSet<String>>();
+        sceneList = new ArrayList<SceneInfo>();
     }
     
     /**
@@ -42,6 +60,8 @@ public class GIFMaker {
      * Looks for files in folder /data that are of the form 
      * name_emotion_number. Creates an entry in a map of the form
      * name_emotion:TalkspriteAnimation. Entries must be .png format.
+     * Should be called after style is selected
+     * TODO use config files
      */
     public void compileAnimations(){
         File dataLocation = new File(style.getSpriteLocation());
@@ -99,6 +119,31 @@ public class GIFMaker {
         return animationMap.get(name);
     }
     
+    /**
+     * 
+     * @return a list of valid characters
+     */
+    public List<String> getCharacters(){
+        return null; //TODO
+    }
+    
+    /**
+     * 
+     * @return valid animations for a particular character
+     */
+    public List<String> getCharacterAnimations(String name){
+        return null; //TODO
+    }
+    
+    public Map<String, Style> getStyleMap(){
+        return styleMap;
+    }
+    
+    public void setStyle(Style style){
+        this.style = style;
+        compileAnimations();
+    }
+    
     public Style getStyle() {
         return style;
     }
@@ -119,17 +164,36 @@ public class GIFMaker {
         sceneList.add(scene);
     }
     
+    public void compileGIF(String filename){
+        gifEncoder.start(filename);
+        for (SceneInfo s: sceneList){
+            
+            s.addFrames(gifEncoder);
+        }
+        gifEncoder.finish();
+    }
+    
     public static void main(String[] args){
-        GIFMaker g = new GIFMaker(new TestStyle());
-        SceneInfo s = new SceneInfo(g);
-        s.setText("GODDAMN WHY AM I OFF CENTER BLUH BLUH");
-        s.setTalksprite("feferi_TalkEyesWideLeaningIn");
-        s.makeFrameInfoList();
-        AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+        GifMaker g = new GifMaker(new TestStyle());
+        SceneInfo s1 = new SceneInfo(g);
+        s1.setText("GODDAMN WHY AM I OFF CENTER BLUH BLUH");
+        s1.setTalksprite("tavros_Blink");
+        s1.makeFrameInfoList();
+        /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.start("data/test.gif");
         encoder.setRepeat(0);
-        s.addFrames(encoder);
-        encoder.finish();
+        s1.addFrames(encoder);
+        encoder.finish();*/
+        //Bug: Can't add multiple scenes
+        SceneInfo s2 = new SceneInfo(g);
+        s2.setText("more text blah blah");
+        s2.setTalksprite("karkat_Normal");
+        s2.setIsLeft(false);
+        s2.makeFrameInfoList();
+        g.addScene(s1);
+        g.addScene(s2);
+        System.out.println(g.getSceneList());
+        g.compileGIF("test.gif");
     }
 
 }

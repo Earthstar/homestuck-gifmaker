@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  */
 public class SceneInfo {
 
-    private GIFMaker parent;
+    private GifMaker parent;
     //Orientation should only be "left" or "right". Enum?
     private boolean isLeft; 
     private String text;
@@ -39,7 +39,7 @@ public class SceneInfo {
      * fill out. All times are in milliseconds.
      * @param parent
      */
-    public SceneInfo(GIFMaker parent){
+    public SceneInfo(GifMaker parent){
         this.parent = parent;
         setIsLeft(true);
         setText(null);
@@ -161,7 +161,7 @@ public class SceneInfo {
         this.isLeft = orientation;
     }
 
-    public GIFMaker getParent() {
+    public GifMaker getParent() {
         return parent;
     }
 
@@ -218,6 +218,9 @@ public class SceneInfo {
         return frames;
     }
     
-    
+    @Override
+    public String toString(){
+        return talksprite + " " + text;
+    }
    
 }
