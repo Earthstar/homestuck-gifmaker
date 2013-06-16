@@ -37,6 +37,11 @@ public class StyleSelectGUI implements GUIClass{
         this.parent = parent;
         this.frame = frame;
         this.panel = panel;
+        initialize();
+        layout();
+    }
+    
+    public void initialize(){
         instruction = new JLabel();
         instruction.setText("Choose style:");
         
@@ -77,15 +82,17 @@ public class StyleSelectGUI implements GUIClass{
                 GifMaker gm = parent.getParent();
                 Map<String, gifmaker.Style> styleMap = gm.getStyleMap();
                 gm.setStyle(styleMap.get(styleString));
+                //Initialize InputSceneGUI
+                InputSceneGUI inputScene = parent.getInputSceneGUI();
+                inputScene.initialize();
+                inputScene.layout();
                 //remove current panel, add next panel to frame
                 frame.remove(panel);
-                frame.setContentPane(parent.getNextPanel());
+                frame.setContentPane(inputScene.getPanel());
                 frame.validate();
                 frame.repaint();
-                System.out.println("done");
             }
         });
-        layout();
     }
     
     /**

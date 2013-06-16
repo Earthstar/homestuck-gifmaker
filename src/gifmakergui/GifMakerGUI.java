@@ -24,30 +24,45 @@ public class GifMakerGUI{
     JFrame frame;
     int currentPanel;
     //Store panels so you can go backwards
-    List<JPanel> panels;
-    List<GUIClass> guis;
+    JPanel p1, p2, p3, p4;
+    StyleSelectGUI styleSelect;
+    InputSceneGUI inputScene;
+    PreviewGUI preview;
+    SaveGUI save;
     
     public GifMakerGUI(GifMaker parent){
         this.parent = parent;
         frame = new JFrame("GifMaker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400); //doesnt' work? TODO
         //Start off at first panel
         currentPanel = 0;
-        guis = new ArrayList<GUIClass>(Arrays.asList(
-                new StyleSelectGUI(this, frame, 
-                        new JPanel()),
-                new InputSceneGUI(this, frame, new JPanel()),
-                new PreviewGUI(),
-                new SaveGUI()
-                ));
-        
+        p1 = new JPanel();
+        p2 = new JPanel();
+        p3 = new JPanel();
+        p4 = new JPanel();
+        GroupLayout layout1 = new GroupLayout(p1);
+        GroupLayout layout2 = new GroupLayout(p2);
+        GroupLayout layout3 = new GroupLayout(p3);
+        GroupLayout layout4 = new GroupLayout(p4);
+        p1.setLayout(layout1);
+        p2.setLayout(layout2);
+        p3.setLayout(layout3);
+        p4.setLayout(layout4);
+        styleSelect = new StyleSelectGUI(this, frame, 
+                p1);
+        inputScene = new InputSceneGUI(this, frame, p2);
+        preview = new PreviewGUI();
+        save = new SaveGUI();
     }
     
     /**
-     * Should only be used for displaying the 0th entry
+     * Should only be used for displaying the StyleSelect GUI
      */
     public void start(){
-        JPanel panel0 = guis.get(0).getPanel();
+        styleSelect.initialize();
+        styleSelect.layout();
+        JPanel panel0 = styleSelect.getPanel();
         frame.add(panel0);
         frame.pack();
         frame.setVisible(true);
@@ -57,18 +72,27 @@ public class GifMakerGUI{
         return parent;
     }
     
-    /**
-     * Returns the next JPanel for the GUIs
-     * Increments current panel, generates next panel
-     * @return
-     */
-    public JPanel getNextPanel(){
-        return new JPanel(); //TODO
+    public StyleSelectGUI getStyleSelectGUI(){
+        return styleSelect;
+    }
+    
+    public InputSceneGUI getInputSceneGUI(){
+        return inputScene;
+    }
+    
+    public PreviewGUI getPreviewGUI(){
+        return preview;
+    }
+    
+    public SaveGUI getSaveGUI(){
+        return save;
     }
     
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
+                
+                
                 GifMaker g = new GifMaker();
                 GifMakerGUI gui = new GifMakerGUI(g);
                 gui.start();

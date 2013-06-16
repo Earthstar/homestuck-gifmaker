@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +110,8 @@ public class GifMaker {
         return nameToEmotion;
     }
     
+
+    
     /**
      * Returns the talksprite associated with a name, or null
      * if it doesn't exist
@@ -116,7 +119,28 @@ public class GifMaker {
      * @return
      */
     public TalkspriteAnimation getAnimation(String name){
+        
         return animationMap.get(name);
+    }
+    
+    //Helper method to sort list
+    public static
+    <T extends Comparable<? super T>> List<T> asSortedList(Collection<T> c) {
+      List<T> list = new ArrayList<T>(c);
+      java.util.Collections.sort(list);
+      return list;
+    }
+    
+    /**
+     * @return an alphabetical array of animations from animationMap
+     */
+    public String[] getAnimationNames(){
+        Set<String> animationSet = animationMap.keySet();
+        Collection<String> unsorted = animationMap.keySet();
+        List<String> sorted = asSortedList(unsorted);
+        String[] ans = new String[sorted.size()];
+        sorted.toArray(ans);
+        return ans;
     }
     
     /**
@@ -176,8 +200,8 @@ public class GifMaker {
     public static void main(String[] args){
         GifMaker g = new GifMaker(new TestStyle());
         SceneInfo s1 = new SceneInfo(g);
-        s1.setText("GODDAMN WHY AM I OFF CENTER BLUH BLUH");
-        s1.setTalksprite("tavros_Blink");
+        s1.setText("Umm, uhh ...");
+        s1.setTalksprite("terezi_Normal");
         s1.makeFrameInfoList();
         /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.start("data/test.gif");
@@ -186,9 +210,8 @@ public class GifMaker {
         encoder.finish();*/
         //Bug: Can't add multiple scenes
         SceneInfo s2 = new SceneInfo(g);
-        s2.setText("more text blah blah");
+        s2.setText("Hi Jeremy.");
         s2.setTalksprite("karkat_Normal");
-        s2.setIsLeft(false);
         s2.makeFrameInfoList();
         g.addScene(s1);
         g.addScene(s2);
