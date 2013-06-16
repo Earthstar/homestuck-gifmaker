@@ -40,6 +40,7 @@ public class TestStyle extends Style{
         leftTalkspriteLocation = new Point(-160,-150);
         rightTalkspriteLocation = new Point(300,50);
         pauseAfterEnd = 5000;
+        defaultTiming = 100;
     }
     
 }

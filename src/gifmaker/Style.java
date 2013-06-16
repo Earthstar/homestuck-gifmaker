@@ -34,6 +34,7 @@ public abstract class Style {
     protected Point leftTalkspriteLocation;
     protected Point rightTalkspriteLocation;
     protected int pauseAfterEnd;
+    protected int defaultTiming;
     
     public String getSpriteLocation(){
         return spriteLocation;
@@ -101,5 +102,9 @@ public abstract class Style {
     
     public int getPauseAfterEnd(){
         return pauseAfterEnd;
+    }
+    
+    public int getDefaultTiming(){
+        return defaultTiming;
     }
 }

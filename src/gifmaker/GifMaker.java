@@ -198,9 +198,10 @@ public class GifMaker {
     }
     
     public static void main(String[] args){
-        GifMaker g = new GifMaker(new TestStyle());
+        GifMaker g = new GifMaker();
+        g.setStyle(new AlterniaboundStyle());
         SceneInfo s1 = new SceneInfo(g);
-        s1.setText("Umm, uhh ...");
+        s1.setText("The quick brown fox jumps over the lazy dog. blah blah blah blah");
         s1.setTalksprite("terezi_Normal");
         s1.makeFrameInfoList();
         /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
@@ -210,8 +211,10 @@ public class GifMaker {
         encoder.finish();*/
         //Bug: Can't add multiple scenes
         SceneInfo s2 = new SceneInfo(g);
-        s2.setText("Hi Jeremy.");
+        s2.setText("lorem ipsum foo bar baz the rain in spain falls mainly on the plain.");
         s2.setTalksprite("karkat_Normal");
+        s2.setIsLeft(false);
+        s2.setTalkspriteTiming(100);
         s2.makeFrameInfoList();
         g.addScene(s1);
         g.addScene(s2);

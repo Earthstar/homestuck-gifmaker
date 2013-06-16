@@ -21,10 +21,10 @@ public class SceneInfo {
     //Orientation should only be "left" or "right". Enum?
     private boolean isLeft; 
     private String text;
-    private String textTiming; //could probably get as int
+    private int textTiming; //could probably get as int
     //talksprite should be a string that is in parent's animationMap
     private String talksprite;
-    private String talkspriteTiming;
+    private int talkspriteTiming;
     private Color textColor; //TODO not sure format of color
     //GUI class responsible for opening background?
     //Or should this class take in a file?
@@ -43,9 +43,9 @@ public class SceneInfo {
         this.parent = parent;
         setIsLeft(true);
         setText(null);
-        setTextTiming("10"); //TODO mess with timing
+        setTextTiming(10); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
-        setTalkspriteTiming("200");
+        setTalkspriteTiming(this.parent.getStyle().getDefaultTiming());
         setBackground("data/default_background.png");
         backgroundImage = null;
         FrameMaker.setStyle(parent.getStyle());
@@ -80,7 +80,7 @@ public class SceneInfo {
      * @return
      */
     public int calculateTiming(){
-        return Integer.parseInt(textTiming); //TODO is this all? This is okay if
+        return textTiming; //TODO is this all? This is okay if
         //talkspriteTiming is evenly divisible by textTiming. What if not?
     }
     
@@ -97,8 +97,9 @@ public class SceneInfo {
         List<BufferedImage> images = a.getImages();
         //Calculate how many letters in text must appear with each animation
         //May be some rounding error
-        int numLettersPerTalk = Integer.parseInt(talkspriteTiming)/
-                Integer.parseInt(textTiming);
+        int numLettersPerTalk = talkspriteTiming/
+                textTiming;
+        System.out.println("numletterspertalk: "+numLettersPerTalk);
         List<FrameInfo> frameInfoList = new ArrayList<FrameInfo>();
         //Stores index of current position
         int imagesPosition = 0;
@@ -115,11 +116,11 @@ public class SceneInfo {
         }
         //Add a couple of frames of the character's mouth moving
         for (int i = 0; 
-                i < parent.getStyle().getPauseAfterEnd()/Integer.parseInt(talkspriteTiming); 
+                i < parent.getStyle().getPauseAfterEnd()/talkspriteTiming; 
                 i++){
             imagesPosition = (imagesPosition + 1) % images.size();
             frameInfoList.add(new FrameInfo(this, text, 
-                    images.get(imagesPosition), Integer.parseInt(talkspriteTiming)));
+                    images.get(imagesPosition), talkspriteTiming));
         }
         frameInfos = frameInfoList;
     }
@@ -173,11 +174,11 @@ public class SceneInfo {
         this.text = text;
     }
 
-    public String getTextTiming() {
+    public int getTextTiming() {
         return textTiming;
     }
 
-    public void setTextTiming(String textTiming) {
+    public void setTextTiming(int textTiming) {
         this.textTiming = textTiming;
     }
 
@@ -189,11 +190,11 @@ public class SceneInfo {
         this.talksprite = talksprite;
     }
 
-    public String getTalkspriteTiming() {
+    public int getTalkspriteTiming() {
         return talkspriteTiming;
     }
 
-    public void setTalkspriteTiming(String talkspriteTiming) {
+    public void setTalkspriteTiming(int talkspriteTiming) {
         this.talkspriteTiming = talkspriteTiming;
     }
 
