@@ -203,8 +203,10 @@ public class GifMaker {
         GifMaker g = new GifMaker();
         g.setStyle(new AlterniaboundStyle());
         SceneInfo s1 = new SceneInfo(g);
-        s1.setText("Lorem ipsum dolor sit amet");
+        s1.setText("Lorem ipsum dolor sit amet bluh bluh bluh");
         s1.setTalksprite("terezi_Normal");
+        s1.setTextColor(0x008282);
+        s1.setTalkspriteTiming(200);
         s1.makeFrameInfoList();
         /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.start("data/test.gif");
@@ -216,6 +218,7 @@ public class GifMaker {
         s2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
         s2.setTalksprite("karkat_Normal");
         s2.setIsLeft(true);
+        s2.setTextColor(0x626262);
 //        s2.setTalkspriteTiming(100);
         s2.makeFrameInfoList();
         g.addScene(s1);

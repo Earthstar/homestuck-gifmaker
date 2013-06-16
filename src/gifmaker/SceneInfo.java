@@ -45,7 +45,7 @@ public class SceneInfo {
         setText(null);
         setTextTiming(10); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
-        setTalkspriteTiming(this.parent.getStyle().getDefaultTiming()/2); //TODO hack fix
+        talkspriteTiming = this.parent.getStyle().getDefaultTiming()/2; //TODO hack fix
         setBackground("data/default_background.png");
         backgroundImage = null;
         FrameMaker.setStyle(parent.getStyle());
@@ -99,7 +99,6 @@ public class SceneInfo {
         //May be some rounding error
         int numLettersPerTalk = talkspriteTiming/
                 textTiming;
-        System.out.println("numletterspertalk: "+numLettersPerTalk);
         List<FrameInfo> frameInfoList = new ArrayList<FrameInfo>();
         //Stores index of current position
         int imagesPosition = 0;
@@ -114,7 +113,6 @@ public class SceneInfo {
             String toAdd = text.substring(0, i+1);
             FrameInfo info = new FrameInfo(this, toAdd, 
                     images.get(imagesPosition), calculateTiming());
-            System.out.println(info);
             frameInfoList.add(info);
         }
         //Add a couple of frames of the character's mouth moving
@@ -122,7 +120,6 @@ public class SceneInfo {
                 i < parent.getStyle().getPauseAfterEnd()/talkspriteTiming; 
                 i++){
             imagesPosition = (imagesPosition + 1) % images.size();
-            System.out.println(talkspriteTiming);
             frameInfoList.add(new FrameInfo(this, text, 
                     images.get(imagesPosition), talkspriteTiming*2)); //hack fix TODO
         }
@@ -203,7 +200,7 @@ public class SceneInfo {
     }
 
     public void setTalkspriteTiming(int talkspriteTiming) {
-        this.talkspriteTiming = talkspriteTiming;
+        this.talkspriteTiming = talkspriteTiming/2;
     }
 
     public String getBackground() {
@@ -216,6 +213,30 @@ public class SceneInfo {
 
     public Color getTextColor() {
         return textColor;
+    }
+    
+    /**
+     * Sets color to hex code. Does not change color if invalid hex code.
+     * @param hex - a valid hex code. 
+     */
+    public void setTextColor(String hex){
+        try{
+        Color.decode(hex);
+        } catch (NumberFormatException e){
+            System.out.println("invalid text color code");
+        }
+    }
+    
+    /**
+     * Sets color to hex code.
+     * @param hex
+     */
+    public void setTextColor(int hex){
+        try{
+            this.textColor = new Color(hex);
+        } catch (Exception e){
+            System.out.println("wrong hex code");
+        }
     }
 
     public void setTextColor(Color textColor) {

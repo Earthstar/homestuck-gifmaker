@@ -20,7 +20,7 @@ public class AlterniaboundStyle extends Style{
         //need to create image of textbox
         textbox = null;
         try{
-        textbox = ImageIO.read(new File("data/Alterniabound/textbox.png"));
+        textbox = ImageIO.read(new File("data/Alterniabound/alterniabound_textbox.png"));
         } catch (IOException ex){
             System.out.println("can't find textbox");
         }
