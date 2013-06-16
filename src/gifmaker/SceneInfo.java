@@ -45,7 +45,7 @@ public class SceneInfo {
         setText(null);
         setTextTiming(10); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
-        setTalkspriteTiming(this.parent.getStyle().getDefaultTiming());
+        setTalkspriteTiming(this.parent.getStyle().getDefaultTiming()/2); //TODO hack fix
         setBackground("data/default_background.png");
         backgroundImage = null;
         FrameMaker.setStyle(parent.getStyle());
@@ -94,7 +94,7 @@ public class SceneInfo {
     public void makeFrameInfoList(){
         //Get individual frames
         TalkspriteAnimation a = parent.getAnimation(talksprite);
-        List<BufferedImage> images = a.getImages();
+        List<BufferedImage> images = a.getBufferedFrames();
         //Calculate how many letters in text must appear with each animation
         //May be some rounding error
         int numLettersPerTalk = talkspriteTiming/
@@ -104,36 +104,44 @@ public class SceneInfo {
         //Stores index of current position
         int imagesPosition = 0;
         //For each letter in text, create a new FrameInfo 
-        //Every n letters, change to the next sprite in images
+        //Every i letters, change to the next sprite in images
         //TODO need to mess with order images are shown?
         for (int i = 0; i < text.length(); i++){
             if (i % numLettersPerTalk == 0){
                 imagesPosition = (imagesPosition + 1) % images.size();
+                System.out.println("image changed");
             }
             String toAdd = text.substring(0, i+1);
-            frameInfoList.add(new FrameInfo(this, toAdd, 
-                    images.get(imagesPosition), calculateTiming()));
+            FrameInfo info = new FrameInfo(this, toAdd, 
+                    images.get(imagesPosition), calculateTiming());
+            System.out.println(info);
+            frameInfoList.add(info);
         }
         //Add a couple of frames of the character's mouth moving
         for (int i = 0; 
                 i < parent.getStyle().getPauseAfterEnd()/talkspriteTiming; 
                 i++){
             imagesPosition = (imagesPosition + 1) % images.size();
+            System.out.println(talkspriteTiming);
             frameInfoList.add(new FrameInfo(this, text, 
-                    images.get(imagesPosition), talkspriteTiming));
+                    images.get(imagesPosition), talkspriteTiming*2)); //hack fix TODO
         }
         frameInfos = frameInfoList;
     }
     
-   /* *//**
-     * Sets this.frames to a list of BufferedImages of frames. 
-     * Should be called by GIFMaker?
-     *//*
-    public void makeFrames(){
-        for (FrameInfo f:frameInfos){
-            frames.add(FrameMaker.makeFrame(f));
-        }
-    }*/
+    /**
+     * Get a preview frame of this scene. Returns image of first sprite
+     * frame and all text. Animation must be set beforehand
+     * @return
+     */
+    public BufferedImage getPreview(){
+        TalkspriteAnimation a = parent.getAnimation(talksprite);
+        List<BufferedImage> images = a.getBufferedFrames();
+        BufferedImage previewSprite = images.get(0);
+        FrameInfo previewFrameInfo = new FrameInfo(this, 
+                this.getText(), previewSprite, 1);
+        return previewFrameInfo.getFrame();
+    }
     
     /**
      * Adds frames to a AnimatedGifEncoder. Should be called by

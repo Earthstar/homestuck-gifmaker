@@ -39,7 +39,7 @@ public class AlterniaboundStyle extends Style{
         leftTalkspriteLocation = new Point(-160,-150);
         rightTalkspriteLocation = new Point(220,-150);
         pauseAfterEnd = 5000;
-        defaultTiming = 200;
+        defaultTiming = 100;
     }
 
 }

@@ -31,6 +31,7 @@ public class GifMaker {
     private Map<String, HashSet<String>> nameToEmotion;
     private List<SceneInfo> sceneList;
     
+    @Deprecated
     public GifMaker(Style style){
         this.style = style;
         gifEncoder = new AnimatedGifEncoder();
@@ -93,7 +94,8 @@ public class GifMaker {
                 if (!animationMap.containsKey(animationName)){
                     animationMap.put(animationName, new TalkspriteAnimation());
                 }
-                animationMap.get(animationName).addFrame(image, Integer.parseInt(nameEmotionID[2]));
+                animationMap.get(animationName).addFrame(image, 
+                        Integer.parseInt(nameEmotionID[2]), this.style.getDefaultTiming());
             } catch (IOException ex){
                 System.out.println("Can't read file");
             }
@@ -201,7 +203,7 @@ public class GifMaker {
         GifMaker g = new GifMaker();
         g.setStyle(new AlterniaboundStyle());
         SceneInfo s1 = new SceneInfo(g);
-        s1.setText("The quick brown fox jumps over the lazy dog. blah blah blah blah");
+        s1.setText("Lorem ipsum dolor sit amet");
         s1.setTalksprite("terezi_Normal");
         s1.makeFrameInfoList();
         /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
@@ -211,10 +213,10 @@ public class GifMaker {
         encoder.finish();*/
         //Bug: Can't add multiple scenes
         SceneInfo s2 = new SceneInfo(g);
-        s2.setText("lorem ipsum foo bar baz the rain in spain falls mainly on the plain.");
+        s2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
         s2.setTalksprite("karkat_Normal");
-        s2.setIsLeft(false);
-        s2.setTalkspriteTiming(100);
+        s2.setIsLeft(true);
+//        s2.setTalkspriteTiming(100);
         s2.makeFrameInfoList();
         g.addScene(s1);
         g.addScene(s2);

@@ -11,10 +11,10 @@ import java.util.List;
  *
  */
 public class TalkspriteAnimation {
-    List<IndexedData<BufferedImage>> talkspriteImages;
+    List<TalkspriteFrameData> talkspriteImages;
     
     public TalkspriteAnimation(){
-        talkspriteImages = new ArrayList<IndexedData<BufferedImage>>();
+        talkspriteImages = new ArrayList<TalkspriteFrameData>();
     }
     
     /**
@@ -24,20 +24,24 @@ public class TalkspriteAnimation {
      * @param frame
      * @param n
      */
-    public void addFrame(BufferedImage frame, int n){
-        IndexedData<BufferedImage> data = 
-                new IndexedData<BufferedImage>(frame, n);
+    public void addFrame(BufferedImage frame, int n, int time){
+        TalkspriteFrameData data = 
+                new TalkspriteFrameData(frame, n, time);
         talkspriteImages.add(data);
     }
     
-    public List<BufferedImage> getImages(){
+    public List<BufferedImage> getBufferedFrames(){
         //Sort list, and then return a list of images
         Collections.sort(talkspriteImages);
         List<BufferedImage> toReturn = new ArrayList<BufferedImage>();
-        for (IndexedData d: talkspriteImages){
+        for (TalkspriteFrameData d: talkspriteImages){
             toReturn.add((BufferedImage) d.data);
         }
         return toReturn;
+    }
+    
+    public List<TalkspriteFrameData> getTalkspriteImages(){
+        return talkspriteImages;
     }
     
     public int size(){

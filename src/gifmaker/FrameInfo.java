@@ -46,5 +46,10 @@ public class FrameInfo {
     public BufferedImage getFrame(){
         return frame;
     }
+    
+    @Override
+    public String toString(){
+        return text + " " + timing;
+    }
 
 }
