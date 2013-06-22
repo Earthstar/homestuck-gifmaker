@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Style {
     protected String spriteLocation;
+    protected String backgroundLocation;
     protected int backgroundWidth;
     protected int backgroundHeight;
     protected BufferedImage textbox;
@@ -38,6 +39,10 @@ public abstract class Style {
     
     public String getSpriteLocation(){
         return spriteLocation;
+    }
+    
+    public String getBackgroundLocation(){
+        return backgroundLocation;
     }
     
     public int getBackgroundWidth() {

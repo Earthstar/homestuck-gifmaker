@@ -46,7 +46,7 @@ public class SceneInfo {
         setTextTiming(10); //TODO mess with timing
         setTalksprite(null); //Create SBaHJ defaults?
         talkspriteTiming = this.parent.getStyle().getDefaultTiming()/2; //TODO hack fix
-        setBackground("data/default_background.png");
+        setBackground(parent.getStyle().getBackgroundLocation());
         backgroundImage = null;
         FrameMaker.setStyle(parent.getStyle());
         frameInfos = new ArrayList<FrameInfo>();
@@ -93,7 +93,11 @@ public class SceneInfo {
      */
     public void makeFrameInfoList(){
         //Get individual frames
+        System.out.println(talksprite);
         TalkspriteAnimation a = parent.getAnimation(talksprite);
+        if (a == null){
+            System.out.println(parent.getAnimationMap());
+        }
         List<BufferedImage> images = a.getBufferedFrames();
         //Calculate how many letters in text must appear with each animation
         //May be some rounding error
@@ -108,16 +112,17 @@ public class SceneInfo {
         for (int i = 0; i < text.length(); i++){
             if (i % numLettersPerTalk == 0){
                 imagesPosition = (imagesPosition + 1) % images.size();
-                System.out.println("image changed");
             }
             String toAdd = text.substring(0, i+1);
             FrameInfo info = new FrameInfo(this, toAdd, 
                     images.get(imagesPosition), calculateTiming());
             frameInfoList.add(info);
         }
+        //Calculate time relative to number of words the character speaks
+        int endPause = 5000; //10*text.length();
         //Add a couple of frames of the character's mouth moving
         for (int i = 0; 
-                i < parent.getStyle().getPauseAfterEnd()/talkspriteTiming; 
+                i < endPause/talkspriteTiming; 
                 i++){
             imagesPosition = (imagesPosition + 1) % images.size();
             frameInfoList.add(new FrameInfo(this, text, 

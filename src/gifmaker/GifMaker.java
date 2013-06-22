@@ -51,6 +51,7 @@ public class GifMaker {
         new GifMaker(null);
         gifEncoder = new AnimatedGifEncoder();
         gifEncoder.setRepeat(0);
+        gifEncoder.setQuality(20);
         this.setDestination(null);
         animationMap = new HashMap<String, TalkspriteAnimation>();
         nameToEmotion = new HashMap<String, HashSet<String>>();
@@ -190,6 +191,10 @@ public class GifMaker {
         sceneList.add(scene);
     }
     
+    public AnimatedGifEncoder getGifEncoder(){
+        return gifEncoder;
+    }
+    
     public void compileGIF(String filename){
         gifEncoder.start(filename);
         for (SceneInfo s: sceneList){
@@ -201,29 +206,41 @@ public class GifMaker {
     
     public static void main(String[] args){
         GifMaker g = new GifMaker();
-        g.setStyle(new AlterniaboundStyle());
+        g.setStyle(new AlterniaboundMinimized());
         SceneInfo s1 = new SceneInfo(g);
-        s1.setText("Lorem ipsum dolor sit amet bluh bluh bluh");
-        s1.setTalksprite("terezi_Normal");
-        s1.setTextColor(0x008282);
-        s1.setTalkspriteTiming(200);
+        s1.setTalksprite("karkat_Normal");
+        s1.setText("YOU CAN REQUEST I JABBER LIKE A MANIAC.");
+        s1.setTextColor(0x626262);
         s1.makeFrameInfoList();
-        /*AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-        encoder.start("data/test.gif");
-        encoder.setRepeat(0);
-        s1.addFrames(encoder);
-        encoder.finish();*/
-        //Bug: Can't add multiple scenes
-        SceneInfo s2 = new SceneInfo(g);
-        s2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-        s2.setTalksprite("karkat_Normal");
-        s2.setIsLeft(true);
-        s2.setTextColor(0x626262);
-//        s2.setTalkspriteTiming(100);
-        s2.makeFrameInfoList();
+//        SceneInfo s2 = new SceneInfo(g);
+//        s2.setTalksprite("karkat_Normal");
+//        s2.setText("YOU CAN REQUEST I JABBER LIKE A MANIAC.");
+//        s2.setTextColor(0x626262);
+//        s2.makeFrameInfoList();
+
+//        SceneInfo s3 = new SceneInfo(g);
+//        s3.setText("Nepeta: :33 < i have b33n practicing my compurrter skills and making a funny mewving picture maker!");
+//        s3.setTalksprite("nepeta_PointedEyes");
+//        s3.setTextColor(0x416600);
+//        s3.setTalkspriteTiming(200);
+//        s3.makeFrameInfoList();
+//        SceneInfo s4 = new SceneInfo(g);
+//        s4.setText("Karkat: YOU MEAN EVEN MORE PEOPLE WILL BE PUTTING WORDS IN MY MOUTH!");
+//        s4.setTextColor(0x626262);
+//        s4.setTalksprite("karkat_Bugout");
+//        s4.setIsLeft(false);
+//        s4.makeFrameInfoList();
+//        SceneInfo s5 = new SceneInfo(g);
+//        s5.setText("Nepeta: :33 < and other things!");
+//        s5.setTextColor(0x416600);
+//        s5.setTalksprite("nepeta_SparklyEyes");
+//        s5.setTalkspriteTiming(200);
+//        s5.makeFrameInfoList();
         g.addScene(s1);
-        g.addScene(s2);
-        System.out.println(g.getSceneList());
+//        g.addScene(s2);
+//        g.addScene(s3);
+//        g.addScene(s4);
+//        g.addScene(s5);
         g.compileGIF("test.gif");
     }
 

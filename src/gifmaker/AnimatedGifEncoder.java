@@ -1295,23 +1295,21 @@ class LZWEncoder {
   public static void main(String[] args){
       AnimatedGifEncoder e = new AnimatedGifEncoder();
       //Want to write to folder data
-      e.start("data/test.gif");
-      e.setDelay(500);
+      e.start("data/avatar.gif");
+      e.setDelay(100);
       e.setRepeat(0);
       //need a buffered image
       BufferedImage white = null;
       BufferedImage black = null;
       try {
-          white = ImageIO.read(new File("data/white.png"));
-          black = ImageIO.read(new File("data/black.png"));
+          white = ImageIO.read(new File("data/avatar_1.png"));
+          black = ImageIO.read(new File("data/avatar_2.png"));
           
       }catch (IOException ex){
           System.out.println("image had error");
       }
       e.addFrame(white);
       e.addFrame(black);
-      //Can set different delays 
-      e.setDelay(2000);
       e.addFrame(white);
       e.addFrame(black);
       e.finish();

@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 public class AlterniaboundStyle extends Style{
     public AlterniaboundStyle(){
         spriteLocation = "data/Alterniabound";
+        backgroundLocation = "data/default_background.png";
         backgroundWidth = 650;
         backgroundHeight = 450;
         //need to create image of textbox
